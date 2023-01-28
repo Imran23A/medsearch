@@ -2,3 +2,4 @@ Flask
 cs50
 sqlite3
 hashlib
+flask_babel

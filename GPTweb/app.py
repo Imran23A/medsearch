@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, make_response, session, flash
-from flask_babel import Babel, gettext
 import hashlib
 import sqlite3
+from flask import Flask, render_template, request, redirect, url_for, make_response, session, flash
+from flask_babel import Babel, get_locale, gettext 
+
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -13,6 +14,13 @@ app.config['LANGUAGES'] = {
 }
 babel = Babel(app)
 
+#@babel.localeselector
+def determine_locale():
+    if 'language' in session:
+        return session['language']
+    return request.accept_languages.best_match(['en', 'ru'])
+
+babel.init_app(app)
 
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
