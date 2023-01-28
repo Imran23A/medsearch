@@ -1,14 +1,15 @@
 import hashlib
 import sqlite3
 from flask import Flask, render_template, request, redirect, url_for, make_response, session, flash
-from flask_babel import Babel, get_locale, gettext 
+from flask_babel import Babel
+from flask_babel import gettext as _
 
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 app.config['BABEL_DEFAULT_LOCALE'] = 'en'
 app.config['BABEL_DEFAULT_FOLDER'] = 'translations'
-app.config['BABEL_TRANSLATION_DIRECTORIES'] = '/translations'
+app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'translations'
 app.config['BABEL_DEFAULT_LOCALE'] = 'en'
 app.config['LANGUAGES'] = {
     'en': 'English',
@@ -16,7 +17,11 @@ app.config['LANGUAGES'] = {
 }
 
 babel = Babel(app)
-babel.init_app(app)
+
+def get_locale():
+    return request.accept_languages.best_match(app.config['LANGUAGES'].keys())
+
+babel.init_app(app, locale_selector=get_locale)
 
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
