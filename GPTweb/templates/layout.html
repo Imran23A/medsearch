@@ -17,10 +17,9 @@
             <input type="submit" value="English">
         </form>
 
-    <form action="{{url_for('set_language', language='ru')}}" method="post">
-        <input type="submit" value="Русский">
-    </form>
-    </form>
+        <form action="{{url_for('set_language', language='ru')}}" method="post">
+            <input type="submit" value="Русский">
+        </form>
     {% if 'username' in session %}
     <p>{{ _("Welcome back") }}, {{ session['username'] }}!</p>
         <form action="{{url_for('deregister')}}" method="post" onsubmit=" return confirm('Are you sure you want to deregister? All information about you accout will be permanently deleted!');">
@@ -47,9 +46,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{url_for('index')}}">Home</a>
-                </li>
                 <li class="nav-item">
                 <a class="nav-link" href="{{url_for('about')}}">About</a>
                 </li>
