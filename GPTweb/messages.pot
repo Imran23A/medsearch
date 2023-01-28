@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-01-28 15:46+0000\n"
+"POT-Creation-Date: 2023-01-28 23:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,13 +19,45 @@ msgstr ""
 
 #: templates/layout.html:24
 msgid "Welcome back"
-msgstr "Добро пожаловать"
+msgstr ""
 
-#: templates/register.html:8
+#: templates/layout.html:27
+msgid "Logout"
+msgstr ""
+
+#: templates/layout.html:31
+msgid "Username"
+msgstr ""
+
+#: templates/layout.html:33
+msgid "Password"
+msgstr ""
+
+#: templates/layout.html:50
+msgid "About"
+msgstr ""
+
+#: templates/layout.html:53
+msgid "Contact"
+msgstr ""
+
+#: templates/layout.html:57
+msgid "Menu"
+msgstr ""
+
+#: templates/layout.html:68
+msgid "Search"
+msgstr ""
+
+#: templates/layout.html:81
+msgid "Your browser does not support the video tag"
+msgstr ""
+
+#: templates/login.html:8 templates/register.html:8
 msgid "Username:"
-msgstr "Имя пользователя"
+msgstr ""
 
-#: templates/register.html:12
+#: templates/login.html:10 templates/register.html:12
 msgid "Password:"
-msgstr "Пароль"
+msgstr ""
 
