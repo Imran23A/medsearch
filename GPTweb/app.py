@@ -5,6 +5,7 @@ import sqlite3
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
+app.config['BABEL_DEFAULT_LOCATE'] = ['ru']
 babel = Babel(app)
 
 

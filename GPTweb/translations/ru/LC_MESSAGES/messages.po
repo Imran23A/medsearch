@@ -3,12 +3,12 @@
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
 #
-msgid "Welcome back, {}!"
-msgstr "Добро пожаловать обратно, {}!"
+msgid ""
+msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-01-26 12:47+0000\n"
-"PO-Revision-Date: 2023-01-26 12:47+0000\n"
+"POT-Creation-Date: 2023-01-28 12:09+0000\n"
+"PO-Revision-Date: 2023-01-28 12:10+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -18,4 +18,8 @@ msgstr "Добро пожаловать обратно, {}!"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.11.0\n"
+
+#: templates/layout.html:24
+msgid "Welcome back"
+msgstr "Добро пожаловать"
 
