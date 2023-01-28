@@ -21,7 +21,7 @@
             <input type="submit" value="Русский">
         </form>
     {% if 'username' in session %}
-    <p>{{ _("Welcome back") }}, {{ session['username'] }}!</p>
+    <p>{{ _('Welcome back') }}, {{ session['username'] }}!</p>
         <form action="{{url_for('deregister')}}" method="post" onsubmit=" return confirm('Are you sure you want to deregister? All information about you accout will be permanently deleted!');">
             <input type="submit" value="Forget me">
             <a href="{{url_for('logout')}}">Logout</a>
