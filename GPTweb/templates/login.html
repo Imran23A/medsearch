@@ -5,9 +5,9 @@
 
 {% block content %}
     <form action="{{url_for('login')}}" method="post">
-        <label for="username">Username:</label>
+        <label for="username">{{ _('Username:') }}</label>
         <input type="text" id="username" name="username"><br>
-        <label for="password">Password:</label>
+        <label for="password">{{ _('Password:') }}</label>
         <input type="password" id="password" name="password"><br>
         {% if error %}
             <p style="color:red;">{{ error }}</p>

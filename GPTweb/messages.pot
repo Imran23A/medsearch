@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-01-28 12:09+0000\n"
+"POT-Creation-Date: 2023-01-28 15:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,4 +20,12 @@ msgstr ""
 #: templates/layout.html:24
 msgid "Welcome back"
 msgstr "Добро пожаловать"
+
+#: templates/register.html:8
+msgid "Username:"
+msgstr "Имя пользователя"
+
+#: templates/register.html:12
+msgid "Password:"
+msgstr "Пароль"
 
