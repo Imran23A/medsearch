@@ -5,16 +5,14 @@ import sqlite3
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
-app.config['BABEL_DEFAULT_LOCATE'] = ['ru']
-babel = Babel(app)
-
-
 app.config['BABEL_DEFAULT_LOCALE'] = 'en'
 app.config['BABEL_DEFAULT_FOLDER'] = 'translations'
 app.config['LANGUAGES'] = {
     'en': 'English',
     'ru': 'Russian',
 }
+babel = Babel(app)
+
 
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
