@@ -8,18 +8,14 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 app.config['BABEL_DEFAULT_LOCALE'] = 'en'
 app.config['BABEL_DEFAULT_FOLDER'] = 'translations'
+app.config['BABEL_TRANSLATION_DIRECTORIES'] = '/translations'
+app.config['BABEL_DEFAULT_LOCALE'] = 'en'
 app.config['LANGUAGES'] = {
     'en': 'English',
     'ru': 'Russian',
 }
+
 babel = Babel(app)
-
-#@babel.localeselector
-def determine_locale():
-    if 'language' in session:
-        return session['language']
-    return request.accept_languages.best_match(['en', 'ru'])
-
 babel.init_app(app)
 
 def hash_password(password):
@@ -49,17 +45,22 @@ def validate_user(username,password):
             return True
     return False
 
-@app.route('/set_language/<string:language>', methods=['GET', 'POST'])
-def set_language(language=None):
-    session['language'] = language
-    return redirect(url_for('index'))
-
 @app.route('/')
 def index():
+    language = session.get('language', 'en')
+    locale = get_locale()
     if 'username' in session:
         username = session['username']
-        return render_template('index.html', username=username)
-    return render_template('index.html')
+        return render_template('index.html', username=username, language=language, locale=locale)
+    return render_template('index.html', language=language)
+
+@app.route('/set_language', methods=['GET', 'POST'])
+def set_language():
+    if request.method == 'POST':
+        session['language'] = request.form.get('language')
+    elif request.method == 'GET':
+        session['language'] = request.args.get('language')
+    return redirect(url_for('index'))
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -69,7 +70,7 @@ def register():
         # Get the values from the form
         username = request.form['username']
         password = request.form['password']
-             # Validate the user input
+        # Validate the user input
         error = None
         if not username:
             error = 'Username is required.'
