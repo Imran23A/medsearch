@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-01-28 23:35+0000\n"
-"PO-Revision-Date: 2023-01-28 23:35+0000\n"
+"POT-Creation-Date: 2023-02-06 22:12+0000\n"
+"PO-Revision-Date: 2023-02-06 22:13+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -19,41 +19,79 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.11.0\n"
 
-#: templates/layout.html:24
+#: templates/about.html:7
+msgid "Welcome to our Evidence-Based Medicine website!"
+msgstr "Добро пожаловать на наш сайт доказательной медицины!"
+
+#: templates/about.html:8
+msgid ""
+"Our website is designed to provide you with the most up-to-date and "
+"reliable information on the effectiveness of various medical treatments "
+"and drugs. Our team of experts uses the latest research and clinical data"
+" to determine the level of evidence supporting each treatment or drug."
+msgstr ""
+"Наш веб-сайт предназначен для того, чтобы предоставить вам самую актуальную и "
+"достоверную информацию об эффективности различных методов лечения "
+"и лекарств. Наша команда экспертов использует новейшие исследования и клинические данные "
+"для определения уровня доказательности, всех видов лечения и препаратов. "
+
+#: templates/about.html:9
+msgid ""
+"We understand that making decisions about your health can be difficult, "
+"which is why we strive to make our information as easy to understand and "
+"accessible as possible. We believe that by providing you with accurate "
+"and unbiased information, you will be able to make more informed "
+"decisions about your healthcare"
+msgstr ""
+"Мы понимаем, что принятие решений о вашем здоровье может быть трудным, "
+"именно поэтому мы стремимся сделать нашу информацию максимально понятной "
+"насколько это возможно. Мы считаем, что предоставляя вам точную "
+"и непредвзятую информацию, мы помогаем вам быть более информированными "
+"при принятии решений касающихся вашего здоровья "
+
+#: templates/about.html:10
+msgid ""
+"Thank you for visiting our website and please feel free to contact us if "
+"you have any questions or feedback."
+msgstr ""
+"Спасибо, что посетили наш веб-сайт, и, пожалуйста, не стесняйтесь обращаться к нам, если"
+"у вас есть какие-либо вопросы или отзывы."
+
+#: templates/layout.html:23
 msgid "Welcome back"
 msgstr "С возвращением"
 
-#: templates/layout.html:27
+#: templates/layout.html:26
 msgid "Logout"
 msgstr "Выйти"
 
-#: templates/layout.html:31
+#: templates/layout.html:30
 msgid "Username"
-msgstr "Имя пользователя"
+msgstr "Имя прльзователя"
 
-#: templates/layout.html:33
+#: templates/layout.html:32
 msgid "Password"
 msgstr "Пароль"
 
-#: templates/layout.html:50
+#: templates/layout.html:49
 msgid "About"
 msgstr "О нас"
 
-#: templates/layout.html:53
+#: templates/layout.html:52
 msgid "Contact"
 msgstr "Контакты"
 
-#: templates/layout.html:57
+#: templates/layout.html:56
 msgid "Menu"
 msgstr "Меню"
 
-#: templates/layout.html:68
+#: templates/layout.html:67
 msgid "Search"
 msgstr "Поиск"
 
-#: templates/layout.html:81
+#: templates/layout.html:80
 msgid "Your browser does not support the video tag"
-msgstr "Ваш браузер не поддерживает этот формат видео"
+msgstr "Ваш браузер не поддерживает фоновое видео"
 
 #: templates/login.html:8 templates/register.html:8
 msgid "Username:"
@@ -61,5 +99,5 @@ msgstr "Имя пользователя"
 
 #: templates/login.html:10 templates/register.html:12
 msgid "Password:"
-msgstr "Имя пользователя"
+msgstr "Пароль"
 
