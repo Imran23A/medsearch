@@ -19,7 +19,11 @@ app.config['LANGUAGES'] = {
 babel = Babel(app)
 
 def get_locale():
+    language = session.get('language')
+    if language and language in app.config['LANGUAGES']:
+        return language
     return request.accept_languages.best_match(app.config['LANGUAGES'].keys())
+
 
 babel.init_app(app, locale_selector=get_locale)
 
@@ -53,18 +57,15 @@ def validate_user(username,password):
 @app.route('/')
 def index():
     language = session.get('language', 'en')
-    locale = get_locale()
+
     if 'username' in session:
-        username = session['username']
-        return render_template('index.html', username=username, language=language, locale=locale)
+        username = session['username'] # check if needed username, lang and locale
+        return render_template('index.html', username=username)
     return render_template('index.html', language=language)
 
-@app.route('/set_language', methods=['GET', 'POST'])
-def set_language():
-    if request.method == 'POST':
-        session['language'] = request.form.get('language')
-    elif request.method == 'GET':
-        session['language'] = request.args.get('language')
+@app.route('/set_language/<string:language>', methods=['POST'])
+def set_language(language):
+    session['language'] = language
     return redirect(url_for('index'))
 
 @app.route('/register', methods=['GET', 'POST'])
