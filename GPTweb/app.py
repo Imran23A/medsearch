@@ -168,6 +168,7 @@ def search():
     result = run_edirect_command(['esearch', '-db', 'pubmed', '-query', query])
     return render_template('search_results.html', result=result)
 
+
 if __name__ == '__main__':
     app.run(debug=True)
 
