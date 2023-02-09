@@ -4,8 +4,8 @@ from flask import Flask, render_template, request, redirect, url_for, make_respo
 import subprocess
 from flask_babel import Babel
 from flask_babel import gettext as _
-import xtract
 import time
+import xml.etree.ElementTree as ET
 
 
 
@@ -60,8 +60,21 @@ def validate_user(username,password):
 
 def run_edirect_command(command):
     result = subprocess.run(command, capture_output=True, text=True)
-    time.sleep(1/3)
     return result.stdout
+
+
+def extract_pubmed_info(result):
+    root = ET.fromstring(result)
+    count = root.find('Count').text
+    ids = [elem.text for elem in root.findall('.//Id')]
+    links = ['https://www.ncbi.nlm.nih.gov/pubmed/{}'.format(id) for id in ids]
+    return count, links
+
+def search_pubmed(query):
+    result = run_edirect_command(["esearch", "-db", "pubmed", "-query", query])
+    time.sleep(1/3)
+    count, links = extract_pubmed_info(result)
+    return count, links
 
 @app.route('/')
 def index():
