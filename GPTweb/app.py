@@ -1,7 +1,7 @@
 import hashlib
-import subprocess
 import sqlite3
 from flask import Flask, render_template, request, redirect, url_for, make_response, session, flash
+import subprocess
 from flask_babel import Babel
 from flask_babel import gettext as _
 
@@ -54,6 +54,10 @@ def validate_user(username,password):
         if hashed_password == hash_password(password):
             return True
     return False
+
+def run_edirect_command(command):
+    result = subprocess.run(command, capture_output=True, text=True)
+    return result.stdout
 
 @app.route('/')
 def index():
@@ -141,11 +145,11 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/search', methods=['POST'])
+@app.route('/search', methods=['GET', 'POST'])
 def search():
     query = request.form['search']
-    result = subprocess.run(['esearch', '-db', 'pubmed', '-query', query], capture_output=True, text=True)
-    return render_template('search_results.html', result=result.stdout)
+    result = run_edirect_command(['esearch', '-db', 'pubmed', '-query', query])
+    return render_template('search_results.html', result=result)
 
 if __name__ == '__main__':
     app.run(debug=True)
