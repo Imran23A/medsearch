@@ -4,6 +4,9 @@ from flask import Flask, render_template, request, redirect, url_for, make_respo
 import subprocess
 from flask_babel import Babel
 from flask_babel import gettext as _
+import xtract
+import time
+
 
 
 app = Flask(__name__)
@@ -57,6 +60,7 @@ def validate_user(username,password):
 
 def run_edirect_command(command):
     result = subprocess.run(command, capture_output=True, text=True)
+    time.sleep(1/3)
     return result.stdout
 
 @app.route('/')
