@@ -1,7 +1,12 @@
 {% extends 'layout.html' %}
 
-{% block title %}Homepage{% endblock %}
+{% block title %}Result{% endblock %}
 
 {% block content %}
+
+{% if result %}
+<h2>Results:</h2>
+<pre>{{ result }}</pre>
+{% endif %}
 
 {% endblock %}
