@@ -5,7 +5,12 @@ import subprocess
 from flask_babel import Babel
 from flask_babel import gettext as _
 import time
+from functools import wraps
 import xml.etree.ElementTree as ET
+import threading
+import requests
+import ratelimit
+import re
 
 
 
@@ -58,23 +63,10 @@ def validate_user(username,password):
             return True
     return False
 
+@ratelimit.rate_limited(9, 1)
 def run_edirect_command(command):
     result = subprocess.run(command, capture_output=True, text=True)
     return result.stdout
-
-
-def extract_pubmed_info(result):
-    root = ET.fromstring(result)
-    count = root.find('Count').text
-    ids = [elem.text for elem in root.findall('.//Id')]
-    links = ['https://www.ncbi.nlm.nih.gov/pubmed/{}'.format(id) for id in ids]
-    return count, links
-
-def search_pubmed(query):
-    result = run_edirect_command(["esearch", "-db", "pubmed", "-query", query])
-    time.sleep(1/3)
-    count, links = extract_pubmed_info(result)
-    return count, links
 
 @app.route('/')
 def index():
@@ -162,11 +154,38 @@ def logout():
     return redirect(url_for('index'))
 
 
+#@app.route('/search', methods=['GET', 'POST'])
+#def search():
+    #query = request.form['search']
+    #result = run_edirect_command(['esearch', '-db', 'pubmed', '-query', query])
+    #return render_template('search_results.html', result=result)
+
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     query = request.form['search']
     result = run_edirect_command(['esearch', '-db', 'pubmed', '-query', query])
-    return render_template('search_results.html', result=result)
+
+    # Extract the publication IDs from the result
+    publication_ids = re.findall(r'<Id>(\d+)</Id>', result)
+
+    # Create a list of dictionaries, where each dictionary represents a publication
+    publications = []
+    for publication_id in publication_ids:
+        # Fetch the abstract for the publication using efetch
+        abstract = run_edirect_command(['efetch', '-db', 'pubmed', '-id', publication_id, '-format', 'abstract'])
+        publication = {
+            'id': publication_id,
+            'abstract': abstract,
+            'link': f"https://www.ncbi.nlm.nih.gov/pubmed/{publication_id}"
+        }
+        publications.append(publication)
+
+    # Sort the list of publications based on PMC reference count
+    sorted_publications = sorted(publications, key=lambda x: x['pmc_reference_count'], reverse=True)
+
+    # Only render the first 10 sorted publications
+    return render_template('search_results.html', publications=sorted_publications[:10])
+
 
 
 if __name__ == '__main__':
