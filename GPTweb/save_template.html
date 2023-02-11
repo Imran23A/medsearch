@@ -4,22 +4,21 @@
 
 {% block content %}
 
-<h3>We have found {{ count }} articles for {{ query }} in PubMed</h3>
+<h3>We have found {{ count }} articles for your {{ query }}</h3>
 
 <h1>{{ _('Search Results') }}</h1>
 
 <ul>
-  {% for res in publications %}
+  {% for res in result %}
     {% if 'abstract' in res %}
       <li>
-        <a href="https://www.ncbi.nlm.nih.gov/pubmed/{{ res['id'] }}">{{ res['title'] }}</a>
+        <a href="{{ res['link'] }}">{{ res['title'] }}</a>
         <button class="more-btn">More</button>
         <p class="abstract" style="display:none;">{{ res['abstract'] }}</p>
       </li>
     {% endif %}
   {% endfor %}
 </ul>
-
 
 <script>
   const moreBtns = document.querySelectorAll('.more-btn');
@@ -35,5 +34,26 @@
   });
 </script>
 
+{% endblock %}
+
+
+{% extends 'layout.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+
+<h1>{{ _('Search Results') }}</h1>
+
+<ul>
+  {% for res in publications %}
+    {% if 'abstract' in res %}
+      <li>
+        <a href="https://www.ncbi.nlm.nih.gov/pubmed/{{ res['id'] }}">{{ res['title'] }}</a>
+        <p>{{ res['abstract'] }}</p>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
 
 {% endblock %}

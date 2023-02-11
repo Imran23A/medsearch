@@ -1,6 +1,6 @@
 import hashlib
 import sqlite3
-from flask import Flask, render_template, request, redirect, url_for, make_response, session, flash
+from flask import Flask, jsonify, render_template, request, redirect, url_for, make_response, session, flash
 import subprocess
 from flask_babel import Babel
 from flask_babel import gettext as _
@@ -167,6 +167,7 @@ def search():
 
     # Extract the publication IDs from the result
     publication_ids = re.findall(r'<Id>(\d+)</Id>', result)
+    count = len(publication_ids)
 
     # Create a list of dictionaries, where each dictionary represents a publication
     publications = []
@@ -175,6 +176,7 @@ def search():
         abstract = run_edirect_command(['efetch', '-db', 'pubmed', '-id', publication_id, '-format', 'abstract'])
         title = run_edirect_command(['efetch', '-db', 'pubmed', '-id', publication_id, '-format', 'xml'])
         title = re.search(r'<ArticleTitle>(.*?)</ArticleTitle>', title).group(1)
+
         publication = {
             'id': publication_id,
             'title': title,
@@ -183,7 +185,7 @@ def search():
         }
         publications.append(publication)
 
-    return render_template('search_results.html', publications=publications)
+    return render_template('search_results.html', publications=publications, count=count, query=query)
 
 if __name__ == '__main__':
     app.run(debug=True)
